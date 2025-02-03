@@ -9,6 +9,16 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Xorify'),
       ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Encrypt or decrypt your data using XOR encryption.',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
