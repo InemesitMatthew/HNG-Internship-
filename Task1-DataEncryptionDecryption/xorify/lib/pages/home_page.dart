@@ -50,79 +50,83 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Xorify'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              // Input textfield (for plaintext or ciper text).
-              TextField(
-                controller: _inputController,
-                decoration: const InputDecoration(
-                  labelText: 'Enter text',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: null,
+      appBar: AppBar(
+        title: const Text('Xorify'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            // Input textfield (for plaintext or ciper text).
+            TextField(
+              controller: _inputController,
+              decoration: const InputDecoration(
+                labelText: 'Enter text',
+                border: OutlineInputBorder(),
               ),
-              const SizedBox(height: 15),
+              maxLines: null,
+            ),
+            const SizedBox(height: 15),
 
-              // Key textfield.
-              TextField(
-                controller: _keyController,
-                decoration: const InputDecoration(
-                  labelText: 'Enter key',
-                  border: OutlineInputBorder(),
-                ),
+            // Key textfield.
+            TextField(
+              controller: _keyController,
+              decoration: const InputDecoration(
+                labelText: 'Enter key',
+                border: OutlineInputBorder(),
               ),
+            ),
 
-              const SizedBox(height: 15),
-              // Buttons for encrypt and decrypt actions.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: _handleEncrypt,
-                    child: const Text('Encrypt'),
-                  ),
-                  ElevatedButton(
-                    onPressed: _handleDecrypt,
-                    child: const Text('Decrypt'),
-                  ),
-                ],
+            const SizedBox(height: 15),
+            // Buttons for encrypt and decrypt actions.
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _handleEncrypt,
+                  child: const Text('Encrypt'),
+                ),
+                ElevatedButton(
+                  onPressed: _handleDecrypt,
+                  child: const Text('Decrypt'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 25),
+            // Display the result of the encryption/decryption.
+            Text(
+              "Result:",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                fontSize: 20,
               ),
-              const SizedBox(height: 25),
-              // Display the result of the encryption/decryption.
-              Text(
-                "Result:",
+            ),
+
+            const SizedBox(height: 10),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                _result,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary,
-                  fontSize: 20,
+                  fontSize: 15,
                 ),
               ),
-
-              const SizedBox(height: 10),
-
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  _result,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    fontSize: 15,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
+            )
+          ],
+        ),
+      ),
+    );
+    // suggestions for improvement:
+    // - Add a button on the result card to copy the result to the clipboard.
+    // - Add a button to clear the input fields.
   }
 }
