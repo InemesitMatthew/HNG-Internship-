@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'themes/theme_provider.dart';
+import 'package:logging/logging.dart';
 
-  void main() async{
-    runApp(
-      ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
-        child: const MyApp(),
-      ),
-    );
-  }
+void main() async {
+  // Logger is used to find out why the api is not working
+  // Configure logging output
+  Logger.root.level = Level.ALL; // Set the log level to display all messages
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

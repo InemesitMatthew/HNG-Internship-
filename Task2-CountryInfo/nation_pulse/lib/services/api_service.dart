@@ -9,7 +9,7 @@ class ApiService {
   // Endpoint for fetching all countries
   static const String allCountriesEndpoint = '/countries';
   // API key provided
-  static const String apiKey = '2115|EsRRBNEpnXJH3rEB4fX7q1xvgIE2QaZKoftSFN3J';
+  static const String apiKey = '2148|0DVoiMSORVjkYfBFeFslsvS3HAQgsMvVsNqhR0oy';
 
   // initialize a logger for this class.
   static final Logger _logger = Logger('ApiService');
@@ -22,16 +22,21 @@ class ApiService {
     final response = await http.get(
       Uri.parse(url),
       headers: {
-        'x-api-key': apiKey,
+        'Accept': 'application/json', // Ensures JSON response
+        'Authorization': 'Bearer $apiKey' // Correct Bearer token format
       },
     );
 
+    // Log response details
+    _logger.info('Response status code: ${response.statusCode}');
+    _logger.info('Response body: ${response.body}');
+
     if (response.statusCode == 200) {
-       // Log the raw JSON response (for debugging)
-      _logger.info('Response body: ${response.body}');
-      
-      final List<dynamic> data = jsonDecode(response.body);
-      // Parse each JSON object into a country instance.
+      // Parse the top-level JSON object and extract the "data" list.
+      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      final List<dynamic> data = jsonResponse['data'];
+
+      // Map each JSON object to a country instance.
       List<Country> countries =
           data.map((json) => Country.fromJson(json)).toList();
 

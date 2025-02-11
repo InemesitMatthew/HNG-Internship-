@@ -37,9 +37,9 @@ class HomePage extends StatelessWidget {
           ),
           // Row for Language and Filter Buttons
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: EdgeInsets.all(10.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Reusable Language Button
                 LanguageButton(),
@@ -70,9 +70,10 @@ class HomePage extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         groupByValue,
-                        style: GoogleFonts.dmSerifText(
-                          fontSize: 20,
+                        style: GoogleFonts.firaSans(
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
                     ),

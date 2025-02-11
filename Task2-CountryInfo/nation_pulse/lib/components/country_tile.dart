@@ -12,16 +12,25 @@ class CountryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(
-        country.flagUrl,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.flag_rounded);
-        },
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.network(
+          country.flagUrl,
+          width: 40,
+          height: 40,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.flag_rounded);
+          },
+        ),
       ),
       title: Text(country.name),
+      subtitle: Text(
+        country.capital,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
+      ),
     );
   }
 }

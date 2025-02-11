@@ -8,9 +8,15 @@ class MySearchBar extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: 'Search Countries...',
+        hintStyle: TextStyle(
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
         prefixIcon: const Icon(Icons.search_rounded),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
         ),
       ),
     );
