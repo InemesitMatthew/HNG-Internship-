@@ -13,6 +13,13 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
+  /// Builds the home page UI with a search bar, a row of buttons for language
+  /// and filter, and a list of countries grouped alphabetically. The list is
+  /// fetched from the API service and displayed in a FutureBuilder. If the
+  /// list is empty, a message is displayed. If there is an error, an error
+  /// message is displayed. The list is displayed in a GroupedListView with
+  /// group separators and a bold, tertiary-colored font. Each country is
+  /// displayed in a CountryTile widget.
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

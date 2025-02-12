@@ -10,6 +10,13 @@ class CountryTile extends StatelessWidget {
   });
 
   @override
+  /// Builds a ListTile widget that displays a country's flag, name, and capital.
+  ///
+  /// The flag is displayed as an image with rounded corners. If the image fails
+  /// to load, a default flag icon is shown. The country's name is displayed as
+  /// the title, and its capital is shown as the subtitle with a color
+  /// determined by the current theme's tertiary color.
+
   Widget build(BuildContext context) {
     return ListTile(
       leading: ClipRRect(

@@ -14,6 +14,18 @@ class ApiService {
   // initialize a logger for this class.
   static final Logger _logger = Logger('ApiService');
 
+  /// Fetches a list of countries from the API.
+  ///
+  /// Constructs the URL using the base URL and endpoint for fetching all countries,
+  /// and sends a GET request with the API key included in the header. Logs the
+  /// response status code and body for debugging purposes.
+  ///
+  /// If the response is successful (status code 200), it parses the JSON data,
+  /// extracts the list of countries, maps them to `Country` instances, and sorts
+  /// them alphabetically by name before returning.
+  ///
+  /// Throws an exception if the API request fails.
+
   static Future<List<Country>> fetchCountries() async {
     // Construct the URL for the API request
     const String url = '$baseUrl$allCountriesEndpoint';
