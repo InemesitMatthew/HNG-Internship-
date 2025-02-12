@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:provider/provider.dart';
 import '../components/country_tile.dart';
 import '../components/filter_button.dart';
 import '../components/language_button.dart';
 import '../components/search_bar.dart';
 import '../components/theme_toggle.dart';
-import '../models/country.dart';
-import '../services/api_service.dart';
+import '../providers/app_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
+
   /// Builds the home page UI with a search bar, a row of buttons for language
   /// and filter, and a list of countries grouped alphabetically. The list is
   /// fetched from the API service and displayed in a FutureBuilder. If the
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Nation Pulse',
-          style: GoogleFonts.dmSerifText(
+          style: GoogleFonts.lobster(
             fontSize: 30,
             color: Theme.of(context).colorScheme.inversePrimary,
           ),
@@ -39,7 +40,7 @@ class HomePage extends StatelessWidget {
         children: [
           // Search Bar Component
           const Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(16.0),
             child: MySearchBar(),
           ),
           // Row for Language and Filter Buttons
@@ -55,26 +56,50 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          // FutureBuilder to fetch and display the list of countries grouped alphabetically.
+
+          // Consumer for Provider-based state management
           Expanded(
-            child: FutureBuilder<List<Country>>(
-              future: ApiService.fetchCountries(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('No countries found.'));
-                } else {
-                  final countries = snapshot.data!;
-                  return GroupedListView<Country, String>(
-                    elements: countries,
+            child: Consumer<AppProvider>(
+              builder: (context, provider, _) {
+                if (provider.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                // Display error message and retry button
+                if (provider.error != null) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(provider.error!), // Display error message
+                        ElevatedButton(
+                          onPressed: provider.refreshData,
+                          child: const Text('Retry'),
+                        ), // Retry button
+                      ],
+                    ),
+                  );
+                }
+
+                // Display message if no countries are found
+                if (provider.filteredCountries.isEmpty) {
+                  return const Center(
+                    child: Text('No countries found.'),
+                  );
+                }
+
+                // Display GroupedListView with group separators
+                return RefreshIndicator(
+                  onRefresh: provider.refreshData,
+                  child: GroupedListView(
+                    elements: provider.filteredCountries,
                     // Group countries by the first letter of the country's name.
                     groupBy: (country) =>
                         country.name.substring(0, 1).toUpperCase(),
                     groupSeparatorBuilder: (String groupByValue) => Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10),
                       child: Text(
                         groupByValue,
                         style: GoogleFonts.firaSans(
@@ -87,8 +112,8 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (context, country) =>
                         CountryTile(country: country),
                     order: GroupedListOrder.ASC,
-                  );
-                }
+                  ),
+                );
               },
             ),
           ),
