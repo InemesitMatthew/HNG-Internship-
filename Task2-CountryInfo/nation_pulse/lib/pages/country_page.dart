@@ -30,6 +30,49 @@ class CountryPage extends StatelessWidget {
         RegExp(r'\.(\d{3})$'), (match) => ',${match.group(1)}');
   }
 
+  /// Helper widget to display a label and its value with different styles.
+  ///
+  /// It provides two [TextSpan] objects to the [RichText] widget. The first
+  /// [TextSpan] displays the [label] with a default font size of 18 and
+  /// a default color of [Colors.blue]. The second [TextSpan] displays the
+  /// [value] with the same font size and a default color of [Colors.black].
+  ///
+  /// The [labelColor] and [valueColor] parameters allow overriding the default
+  /// colors for the label and value, respectively.
+  ///
+  /// The [Padding] widget is used to add a small amount of vertical
+  /// spacing between the different detail items.
+  Widget buildDetailItem({
+    required String label,
+    required String value,
+    Color? labelColor,
+    Color? valueColor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: '$label: ',
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                color: labelColor ?? Colors.blue, // default label color
+              ),
+            ),
+            TextSpan(
+              text: value,
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+                color: valueColor ?? Colors.black, // default value color
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
 
   /// Builds the country page widget tree.
@@ -81,49 +124,123 @@ class CountryPage extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Display the country's name and capital.
+            // Display the country details title.
             Text(
-              'Capital: ${country.capital}',
-              style: GoogleFonts.roboto(
-                fontSize: 20,
+              'Country Details',
+              style: GoogleFonts.handjet(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            // DEV NOTE: Please leave the commented code below the
+            // "buildDetailItem" it is my initial implementation
+            // before deciding to give it a good look, I am keeping it
+            // there just because lmao ;).
+
+            // Display the country's name and capital.
+            buildDetailItem(
+              label: 'Capital',
+              value: country.capital,
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
+            ),
+            // Text(
+            //   'Capital: ${country.capital}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
 
             const SizedBox(height: 10),
 
             // Display the country's population.
-            Text(
-              'Population: ${formatPopulation(country.population)}',
-              style: GoogleFonts.roboto(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+            buildDetailItem(
+              label: 'Population',
+              value: formatPopulation(country.population),
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
             ),
+            // Text(
+            //   'Population: ${formatPopulation(country.population)}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
 
             const SizedBox(height: 10),
 
             // Display the Continent.
-            Text(
-              'Continent: ${country.continent}',
-              style: GoogleFonts.roboto(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+            buildDetailItem(
+              label: 'Continent',
+              value: country.continent,
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
             ),
+            // Text(
+            //   'Continent: ${country.continent}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
 
             const SizedBox(height: 10),
 
             // Display the Country Code.
-            Text(
-              'Country Code: ${country.countryCode}',
-              style: GoogleFonts.roboto(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+            buildDetailItem(
+              label: 'Country Code',
+              value: country.countryCode,
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
             ),
+            // Text(
+            //   'Country Code: ${country.countryCode}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
 
             const SizedBox(height: 10),
+
+            // Display the Timezone.
+            buildDetailItem(
+              label: 'Timezone',
+              value: country.timezone,
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
+            ),
+            // Text(
+            //   'Timezone: ${country.timezone}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
+
+            const SizedBox(height: 10),
+
+            // Display the Languages.
+            buildDetailItem(
+              label: 'Languages',
+              value: country.languages.values.join(', '),
+              labelColor: Theme.of(context).colorScheme.inversePrimary,
+              valueColor: Theme.of(context).colorScheme.tertiary,
+            ),
+            // Text(
+            //   'Languages: ${country.languages.values.join(', ')}',
+            //   style: GoogleFonts.roboto(
+            //     fontSize: 20,
+            //     color: Theme.of(context).colorScheme.inversePrimary,
+            //   ),
+            // ),
           ],
         ),
       ),

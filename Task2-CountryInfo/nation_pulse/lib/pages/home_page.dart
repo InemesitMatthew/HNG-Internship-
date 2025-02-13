@@ -31,12 +31,31 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Nation Pulse',
-          style: GoogleFonts.lobster(
-            fontSize: 30,
-            color: Theme.of(context).colorScheme.inversePrimary,
-          ),
+        // Title with red dot at the bottom left
+        title: Stack(
+          alignment: Alignment.bottomLeft,
+          children: [
+            Text(
+              'Nation Pulse',
+              style: GoogleFonts.lobster(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
+            // Red dot positioned at the bottom left of the title
+            Positioned(
+              bottom: 0,
+              left: 80, // Adjust this value to position the dot correctly
+              child: Container(
+                width: 5,
+                height: 5,
+                decoration: const BoxDecoration(
+                  color: Colors.red, // Change this to your desired color
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+          ],
         ),
         actions: const [
           // Reusable theme toggle button.

@@ -39,12 +39,30 @@ class AppProvider extends ChangeNotifier {
 
   // List of time zones
   final List<String> timeZones = [
-    'GMT+1:00',
-    'GMT+2:00',
-    'GMT+3:00',
-    'GMT+4:00',
-    'GMT+5:00',
-    'GMT+6:00',
+    'UTC+01:00',
+    'UTC+02:00',
+    'UTC+03:00',
+    'UTC+04:00',
+    'UTC+05:00',
+    'UTC+06:00',
+    'UTC+07:00',
+    'UTC+08:00',
+    'UTC+09:00',
+    'UTC+10:00',
+    'UTC+11:00',
+    'UTC+12:00',
+    'UTC-01:00',
+    'UTC-02:00',
+    'UTC-03:00',
+    'UTC-04:00',
+    'UTC-05:00',
+    'UTC-06:00',
+    'UTC-07:00',
+    'UTC-08:00',
+    'UTC-09:00',
+    'UTC-10:00',
+    'UTC-11:00',
+    'UTC-12:00',
   ];
 
   // Search & Countries Management
@@ -198,22 +216,63 @@ class AppProvider extends ChangeNotifier {
 
     // Apply continent filter
     if (_filters.selectedContinents.isNotEmpty) {
-      // Implementation note: I'll need to add continent data to the country model
-      // So I'll leave it as is
-      // filtered = filtered
-      //     .where((country) =>
-      //         _filters.selectedContinents.contains(country.continent))
-      //     .toList();
+      // Take the current list (filtered) and apply .where() function
+      filtered = filtered
+          .where((country) =>
+              _filters.selectedContinents.contains(country.continent))
+          .toList();
     }
 
     // Apply timezone filter
     if (_filters.selectedTimeZones.isNotEmpty) {
-      // Implementation note: I'll need to add timezone data to the Country model
-      // So I'll also leave it as is
-      // filtered = filtered
-      //     .where((country) =>
-      //         _filters.selectedTimeZones.contains(country.timezone))
-      //     .toList();
+      // Take the current list (filtered) and apply .where() function
+      filtered = filtered
+          .where((country) =>
+              _filters.selectedTimeZones.contains(country.timezone))
+          .toList();
+    }
+
+    // Apply language filter.
+    // Map the selected language (e.g., "EN") to the API's language key (e.g., "eng").
+    String apiLanguageKey;
+    switch (_selectedLanguage) {
+      case 'EN':
+        apiLanguageKey = 'eng';
+        break;
+      case 'FR':
+        apiLanguageKey = 'fra';
+        break;
+      case 'ES':
+        apiLanguageKey = 'spa';
+        break;
+      case 'DE':
+        apiLanguageKey = 'deu';
+        break;
+      case 'IT':
+        apiLanguageKey = 'ita';
+        break;
+      case 'RU':
+        apiLanguageKey = 'rus';
+        break;
+      case 'AR':
+        apiLanguageKey = 'ara';
+        break;
+      case 'ZH':
+        apiLanguageKey = 'zho';
+        break;
+      case 'JA':
+        apiLanguageKey = 'jpn';
+        break;
+      case 'KO':
+        apiLanguageKey = 'kor';
+        break;
+      default:
+        apiLanguageKey = '';
+    }
+    if (apiLanguageKey.isNotEmpty) {
+      filtered = filtered
+          .where((country) => country.languages.containsKey(apiLanguageKey))
+          .toList();
     }
 
     _filteredCountries = filtered;
