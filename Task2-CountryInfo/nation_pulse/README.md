@@ -45,6 +45,14 @@ Ensure you have the following installed:
    flutter run
    ```
 
+## 💡 Tips
+- 📱 **Run on Android** – Launch the app on your Android device.
+- 🖥️ **Run on iOS** – Launch the app on your iOS device.
+- 📱 **Run Demo App** - Lauch using this appetize.io link(considering I put the wrong git link lmao :).
+  ```sh
+   https://appetize.io/app/b_y74j7ar5xpg4infkadehosc23e
+   ```
+
 ## 📖 Usage Instructions
 - 🏠 **Launch the App** – The home screen showcases the country list.
 - 🔍 **Search for a Country** – Type in the search bar to quickly find a country.
