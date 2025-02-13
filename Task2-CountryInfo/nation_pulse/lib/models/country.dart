@@ -1,27 +1,46 @@
 class Country {
   final String name;
-  final String flagUrl;
   final String capital;
+  final String flagUrl;
+  final int population;
+  final String continent;
+  final String countryCode;
 
   Country({
     required this.name,
+    required this.capital,
     required this.flagUrl,
-    required this.capital
+    required this.population,
+    required this.continent,
+    required this.countryCode,
   });
 
-  // Factory constructor adjusted based on the API response:
-  // - "name" is a plain string, not a map
-  // - We'll construct the flag URL using the "iso2" code.
-   factory Country.fromJson(Map<String, dynamic> json) {
-    // Construct the flag URL from iso2 using a flag CDN.
-    // For example, for iso2 "AF", the URL becomes "https://flagcdn.com/w320/af.png"
-    final String iso2 = (json['iso2'] as String).toLowerCase();
-    final String flagUrl = 'https://flagcdn.com/w320/$iso2.png';
+  // Factory method to create a new Country instance from a JSON object.
+  factory Country.fromJson(Map<String, dynamic> json) {
+    // Get capital (if available, the API returns a list)
+    String capital = '';
+    if (json['capital'] != null &&
+        json['capital'] is List &&
+        json['capital'].isNotEmpty) {
+      capital = json['capital'][0] as String;
+    }
 
+    // Get continent (API returns a list under "continents")
+    String continent = '';
+    if (json['continents'] != null &&
+        json['continents'] is List &&
+        json['continents'].isNotEmpty) {
+      continent = json['continents'][0] as String;
+    }
+
+    // Return a new Country instance
     return Country(
-      name: json['name'] as String,
-      flagUrl: flagUrl,
-      capital: json['capital'] as String
+      name: json['name']['common'] as String,
+      capital: capital,
+      flagUrl: json['flags']['png'] as String,
+      population: json['population'] as int,
+      continent: continent,
+      countryCode: json['cca2'] as String,
     );
   }
 }

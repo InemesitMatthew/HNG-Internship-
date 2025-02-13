@@ -14,13 +14,20 @@ class HomePage extends StatelessWidget {
 
   @override
 
-  /// Builds the home page UI with a search bar, a row of buttons for language
-  /// and filter, and a list of countries grouped alphabetically. The list is
-  /// fetched from the API service and displayed in a FutureBuilder. If the
-  /// list is empty, a message is displayed. If there is an error, an error
-  /// message is displayed. The list is displayed in a GroupedListView with
-  /// group separators and a bold, tertiary-colored font. Each country is
-  /// displayed in a CountryTile widget.
+  /// Builds the main UI for the HomePage.
+  ///
+  /// The widget tree consists of a [Scaffold] with an [AppBar] and a [Column]
+  /// as its body. The [AppBar] contains the title 'Nation Pulse' and a theme
+  /// toggle button. The body includes a [MySearchBar], a row with [LanguageButton]
+  /// and [FilterButton], and a [Consumer] that listens to [AppProvider].
+  ///
+  /// The [Consumer] manages the state of the country list, displaying a
+  /// [CircularProgressIndicator] while loading, an error message and retry button
+  /// on failure, and a message if no countries are found. If countries are
+  /// available, they are displayed using a [GroupedListView], grouped by the
+  /// first letter of the country name. Tapping a country tile navigates to the
+  /// country's page.
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -109,8 +116,18 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    itemBuilder: (context, country) =>
-                        CountryTile(country: country),
+                    itemBuilder: (context, country) => CountryTile(
+                      country: country,
+                      // Navigate to the country page when the tile is tapped.
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/country_page',
+                          arguments:
+                              country, // where country is a Country instance.
+                        );
+                      },
+                    ),
                     order: GroupedListOrder.ASC,
                   ),
                 );

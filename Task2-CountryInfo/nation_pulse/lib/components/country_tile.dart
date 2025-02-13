@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 import '../models/country.dart';
 
 class CountryTile extends StatelessWidget {
+  final VoidCallback? onTap;
   final Country country;
 
   const CountryTile({
     super.key,
     required this.country,
+    required this.onTap,
   });
 
   @override
-  /// Builds a ListTile widget that displays a country's flag, name, and capital.
-  ///
-  /// The flag is displayed as an image with rounded corners. If the image fails
-  /// to load, a default flag icon is shown. The country's name is displayed as
-  /// the title, and its capital is shown as the subtitle with a color
-  /// determined by the current theme's tertiary color.
 
+  /// Builds a list tile for a country, with a flag image on the left, the
+  /// country name as the title, and the capital as the subtitle.
+  ///
+  /// The tile is tappable and calls the `onTap` callback when tapped. The
+  /// flag image is a 40x40 rounded rectangle with a circular border radius
+  /// of 10. If the image fails to load, a flag icon is displayed instead.
+  ///
+  /// The capital text is displayed in the color scheme's tertiary color.
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.network(

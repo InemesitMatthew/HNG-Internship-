@@ -4,27 +4,27 @@ import 'package:logging/logging.dart';
 import '../models/country.dart';
 
 class ApiService {
-  // Base URL for the API
-  static const String baseUrl = 'https://restfulcountries.com/api/v1';
-  // Endpoint for fetching all countries
-  static const String allCountriesEndpoint = '/countries';
-  // API key provided
-  static const String apiKey = '2148|0DVoiMSORVjkYfBFeFslsvS3HAQgsMvVsNqhR0oy';
+  // Updated base URL for the new API version.
+  static const String baseUrl = 'https://restcountries.com/v3.1';
+
+  // Updated endpoint for fetching all countries.
+  static const String allCountriesEndpoint = '/all';
 
   // initialize a logger for this class.
   static final Logger _logger = Logger('ApiService');
 
   /// Fetches a list of countries from the API.
   ///
-  /// Constructs the URL using the base URL and endpoint for fetching all countries,
-  /// and sends a GET request with the API key included in the header. Logs the
-  /// response status code and body for debugging purposes.
+  /// Constructs a URL using the base URL and endpoint defined in the class,
+  /// sends a GET request, and expects a JSON response that is parsed into a
+  /// list of `Country` objects. The list is sorted alphabetically by country
+  /// name before being returned.
   ///
-  /// If the response is successful (status code 200), it parses the JSON data,
-  /// extracts the list of countries, maps them to `Country` instances, and sorts
-  /// them alphabetically by name before returning.
+  /// Logs the response status code and body for debugging purposes.
   ///
-  /// Throws an exception if the API request fails.
+  /// Throws an exception if the response status code is not 200.
+  ///
+  /// Returns a future that resolves to a list of `Country` objects.
 
   static Future<List<Country>> fetchCountries() async {
     // Construct the URL for the API request
@@ -35,7 +35,6 @@ class ApiService {
       Uri.parse(url),
       headers: {
         'Accept': 'application/json', // Ensures JSON response
-        'Authorization': 'Bearer $apiKey' // Correct Bearer token format
       },
     );
 
@@ -44,15 +43,12 @@ class ApiService {
     _logger.info('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
-      // Parse the top-level JSON object and extract the "data" list.
-      final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      final List<dynamic> data = jsonResponse['data'];
-
-      // Map each JSON object to a country instance.
+      // Since the new API returns a JSON array directly:
+      final List<dynamic> data = jsonDecode(response.body);
       List<Country> countries =
           data.map((json) => Country.fromJson(json)).toList();
 
-      // Sort countries alpjabetically by name.
+      // Sort countries alphabetically by name.
       countries.sort((a, b) => a.name.compareTo(b.name));
       return countries;
     } else {
