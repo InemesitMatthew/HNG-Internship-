@@ -1,4 +1,4 @@
-# Stage 3: 3D Asset Animation App
+# Task 3: 3D Asset Animation App
 
 ## Objective
 Develop a cross-platform Flutter application (mobile and desktop) that loads, displays, and animates two 3D assets (.glb files). The app must allow user interaction to control animations.
