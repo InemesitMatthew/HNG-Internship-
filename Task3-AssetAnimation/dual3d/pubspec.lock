@@ -78,6 +78,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_scene:
+    dependency: "direct main"
+    description:
+      name: flutter_scene
+      sha256: "64a6167ed15118d63a72b740b4ec90c3e34f02f882e8e54e397555e164a97077"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1-dev.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

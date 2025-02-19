@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: ModelViewer(
                       src: "lib/images/male.glb",
-                      autoRotate: true,
+                      autoRotate: false,
                     ),
                   ),
                   Expanded(
