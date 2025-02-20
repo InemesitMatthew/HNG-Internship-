@@ -9,7 +9,7 @@ import '../utils/platform_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       modelType: 'female',
       baseModelPath: "lib/assets/models/female.glb",
     );
-    
+
     // Delay reading the platform from context until after first frame.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -93,6 +93,21 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          // Display the 3D models.
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                    child: ModelViewerContainer(controller: maleController)),
+                Expanded(
+                    child: ModelViewerContainer(controller: femaleController)),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
           // Mobile-specific controls.
           if (!desktop)
             Padding(
@@ -120,17 +135,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          const SizedBox(height: 10),
-          // Display the 3D models.
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(child: ModelViewerContainer(controller: maleController)),
-                Expanded(child: ModelViewerContainer(controller: femaleController)),
-              ],
-            ),
-          ),
         ],
       ),
     );
