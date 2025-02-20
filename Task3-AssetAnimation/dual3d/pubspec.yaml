@@ -64,20 +64,22 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # Model files
+    - lib/assets/models/readyplayer.glb
+    - lib/assets/models/readyplayer2.glb
     - lib/assets/models/male.glb
     - lib/assets/models/female.glb
     - lib/assets/animations/feminine/Feminine_TPose.glb
     - lib/assets/animations/masculine/Masculine_TPose.glb
     
     # Animation directories with wildcards
-    - lib/assets/animations/feminine/dance/*.glb
-    - lib/assets/animations/masculine/dance/*.glb
-    - lib/assets/animations/feminine/idle/*.glb
-    - lib/assets/animations/masculine/idle/*.glb
-    - lib/assets/animations/feminine/expression/*.glb
-    - lib/assets/animations/masculine/expression/*.glb
-    - lib/assets/animations/feminine/locomotion/*.glb
-    - lib/assets/animations/masculine/locomotion/*.glb
+    - lib/assets/animations/feminine/dance/
+    - lib/assets/animations/masculine/dance/
+    - lib/assets/animations/feminine/idle/
+    - lib/assets/animations/masculine/idle/
+    - lib/assets/animations/feminine/expression/
+    - lib/assets/animations/masculine/expression/
+    - lib/assets/animations/feminine/locomotion/
+    - lib/assets/animations/masculine/locomotion/
 
 
   #   - images/a_dot_ham.jpeg

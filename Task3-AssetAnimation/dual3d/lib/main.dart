@@ -5,6 +5,7 @@ import 'themes/theme_provider.dart';
 
 void main() {
   runApp(
+    // Theme provider
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       child: const MyApp(),
