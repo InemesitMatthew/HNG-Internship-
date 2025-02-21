@@ -1,4 +1,3 @@
-// lib/screens/home_page.dart
 import 'package:flutter/material.dart';
 import '../components/model_viewer_container.dart';
 import '../components/animation_category_selector.dart';

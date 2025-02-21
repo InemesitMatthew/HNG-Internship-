@@ -26,6 +26,7 @@ class ModelViewerContainer extends StatelessWidget {
               ar: false,
               cameraOrbit: controller.cameraOrbit,
               cameraControls: true,
+              animationName: controller.currentAnimationName,
             ),
             if (controller.currentAnimationName != null)
               Positioned(
