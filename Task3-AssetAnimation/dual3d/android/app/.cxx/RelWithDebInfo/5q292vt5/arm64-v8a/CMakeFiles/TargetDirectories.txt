@@ -1,0 +1,2 @@
+C:/Users/HP/Desktop/HNG-Internship-/Task3-AssetAnimation/dual3d/android/app/.cxx/RelWithDebInfo/5q292vt5/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/HP/Desktop/HNG-Internship-/Task3-AssetAnimation/dual3d/android/app/.cxx/RelWithDebInfo/5q292vt5/arm64-v8a/CMakeFiles/rebuild_cache.dir
