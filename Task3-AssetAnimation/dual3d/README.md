@@ -18,7 +18,7 @@ Features:
 Installation:
 -------------
 1. Clone the Repository:  
-  • git clone <repository_url>  
+  • git clone <https://github.com/InemesitMatthew/HNG-Internship-/tree/main/Task3-AssetAnimation/dual3d>  
   • cd dual3d
 
 2. Install Dependencies:  
