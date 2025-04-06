@@ -1,5 +1,11 @@
-# HNG Internship Tasks  
-This repository contains all tasks for the HNG internship, organized into subdirectories.  
-Task 5 to 10 can be found in Task 4 because since then ive only been working on building telex so there was no point making new subdirectories
-I am a finalist of HNG12 
-Mobile Track
+🚀 **HNG Internship Tasks Repository**  
+This repository contains my project submissions for the HNG Internship (Mobile Track), organized into task-specific subdirectories.
+
+### **Task Structure Overview**
+- Tasks 1-4 are in their respective directories.  
+- **Tasks 5-10** are consolidated under the `Task4/` directory, as these involved iterative development of the **Telex Project** – a priority deliverable requiring continuous updates in a single codebase.  
+*(Separate directories were unnecessary for these later stages due to the project's unified nature.)*
+
+### **About Me**  
+📱 **Mobile Track Finalist** | HNGx Cohort 12  
+All tasks reflect my Flutter(dart) development journey during the internship.
